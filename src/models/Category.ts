@@ -1,12 +1,14 @@
-import mongoose from "mongoose";
+import mongoose, { StringExpressionOperatorReturningBoolean } from "mongoose";
 
 export interface CategoryInterface extends mongoose.Document {
     name: string;
+    owner: mongoose.Types.ObjectId;
 }
 
 const CategorySchema = new mongoose.Schema<CategoryInterface>(
     {
-        name: { type: String, required: true, unique: true },
+        name: { type: String, required: true, unique: false },
+        owner: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     },
     {
         timestamps: true,
