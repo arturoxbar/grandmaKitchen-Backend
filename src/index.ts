@@ -5,6 +5,8 @@ import database from "./config/database";
 import session from "express-session";
 import passport from "passport";
 import dotenv from "dotenv";
+import recipeRoutes from "./routes/recipeRoutes";
+import categoryRoutes from "./routes/categoryRoutes";
 
 dotenv.config({ path: ".env" });
 
@@ -21,6 +23,9 @@ app.use(passport.initialize()); // se inicializa passport
 app.use(passport.session()); // se usa el middleware para que express pueda usar sesiones de passport
 
 app.use("/api/v1/users", userRoutes); // se declaran las rutas para los usuarios
+app.use("/api/v1/recipes", recipeRoutes); // se declaran las rutas para las recetas
+app.use("/api/v1/categories", categoryRoutes); // se declaran las rutas para las categorias
+
 
 try {
     database.on("error", (err: any) => {
