@@ -1,0 +1,28 @@
+import mongoose from "mongoose";
+
+export interface RecipeInterface extends mongoose.Document {
+    name: string;
+    description: string;
+    steps: string;
+    ingridients: string;
+    image?: string;
+    owner: mongoose.Types.ObjectId;
+}
+
+const RecipeSchema = new mongoose.Schema<RecipeInterface>(
+    {
+
+        name: { type: String, required: true },
+        description: { type: String, required: true },
+        image: { type: String, required: false, default: null },
+        steps: { type: String, required: true, default: null },
+        ingridients: { type: String, required: true, default: null },
+        owner: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    },
+    {
+        timestamps: true,
+    }
+);
+
+const Recipe = mongoose.model<RecipeInterface>("Recipe", RecipeSchema);
+export default Recipe;
