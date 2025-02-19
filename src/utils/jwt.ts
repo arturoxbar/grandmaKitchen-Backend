@@ -4,8 +4,9 @@ import bcrypt from "bcrypt";
 
 const SECRET_KEY = process.env.JWT_SECRET || "default_secret";
 
+
 export const generateToken = (payload: object) => {
-    return jwt.sign(payload, SECRET_KEY, { expiresIn: "1h" });
+    return jwt.sign(payload, SECRET_KEY, { expiresIn: "99h" });
 };
 
 export const decryptToken = (token: string) => {
