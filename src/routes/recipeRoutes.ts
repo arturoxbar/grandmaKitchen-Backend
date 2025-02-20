@@ -5,7 +5,8 @@ import {
     getRecipe,
     updateRecipe,
     deleteRecipe,
-    getUserRecipes
+    getUserRecipes,
+    setFavorite
 } from "../controllers/recipeControllers";
 import authenticate from "../middlewares/auth";
 
@@ -15,6 +16,7 @@ router.get("/user", authenticate, getUserRecipes);
 router.route("/:recipeId")
     .get(getRecipe)
     .put(authenticate, updateRecipe)
-    .delete(authenticate, deleteRecipe);
+    .delete(authenticate, deleteRecipe)
+    .patch(authenticate, setFavorite);
 
 export default router;
