@@ -1,5 +1,12 @@
 import { Router } from "express";
-import { singIn, login, EditUser, deleteUser, getUserInfo } from "../controllers/userControllers";
+import {
+  singIn,
+  login,
+  EditUser,
+  deleteUser,
+  getUserInfo,
+  resetPassword,
+} from "../controllers/userControllers";
 import authenticate from "../middlewares/auth";
 
 const router = Router();
@@ -11,9 +18,11 @@ router.post("/signup", singIn);
 router.post("/login", login);
 
 // Rutas protegidas
-router.route("/user")
-    .put(authenticate, EditUser)
-    .delete(authenticate, deleteUser)
-    .get(authenticate, getUserInfo);
+router
+  .route("/user")
+  .put(authenticate, EditUser)
+  .patch(resetPassword)
+  .delete(authenticate, deleteUser)
+  .get(authenticate, getUserInfo);
 
 export default router;
