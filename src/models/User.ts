@@ -6,6 +6,7 @@ export interface UserInterface {
     username: string;
     password: string;
     email: string;
+    secret: string;
     verifyPassword: (password: string) => Promise<boolean>;
 }
 
@@ -14,6 +15,7 @@ const UserSchema = new mongoose.Schema<UserInterface>({
     username: { type: String, required: true, unique: false },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true, unique: false },
+    secret: { type: String, required: true, unique: false }
 });
 
 // Middleware para hashear la contraseña antes de guardar el usuario
