@@ -7,6 +7,8 @@ export interface RecipeInterface extends mongoose.Document {
     ingridients: string;
     image?: string;
     owner: mongoose.Types.ObjectId;
+    fav: boolean;
+    categories: [string];
 }
 
 const RecipeSchema = new mongoose.Schema<RecipeInterface>(
@@ -18,6 +20,8 @@ const RecipeSchema = new mongoose.Schema<RecipeInterface>(
         steps: { type: String, required: true, default: null },
         ingridients: { type: String, required: true, default: null },
         owner: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+        categories: { type: [String] },
+        fav: { type: Boolean, default: false }
     },
     {
         timestamps: true,
